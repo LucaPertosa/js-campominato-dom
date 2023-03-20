@@ -9,13 +9,14 @@ const scoreDisplay = document.getElementById('score');
 
 // Assegno al bottone l'event listener con la funzione creata per creare la griglia
 createGridButton.addEventListener('click', createGrid);
-
+// Condizioni di partenza
 let bombs = [];
 let score = 0;
 let maxScore = 0;
 
 function createGrid() {
     // Resetto il punteggio e la lista delle bombe
+    gameEnd = false;
     score = 0;
     bombs = [];
     scoreDisplay.innerText = `Score: ${score}`;
@@ -86,19 +87,18 @@ function handleItemClick(event) {
     // Controllo se la casella cliccata è una bomba
     if (bombs.includes(clickedItemNumber)) {
         clickedItem.classList.add("bomb");
-        gameEnd = true;
         // Mostra tutte le bombe presenti nella griglia
         grid.querySelectorAll(".grid-item").forEach(item => {
             if (bombs.includes(parseInt(item.innerText))) {
                 item.classList.add("bomb");
-
             };
         });
         // Mostra un alert che avvisa della sconfitta e chiede se si vuole rigiocare
         if (confirm("Hai perso! Vuoi rigiocare?")) {
-            createGrid();
-            gameEnd = true;
+            grid.innerHTML = `<h1>Clicca su play per rigiocare</h1>`
+            resetGame();
         };
+        gameEnd = true;
     } else {
         if (!clickedItem.classList.contains("clicked")) {
             // Se la casella cliccata non è una bomba, la colora di verde e aumenta il punteggio
@@ -111,8 +111,16 @@ function handleItemClick(event) {
             gameEnd = true;
             // Mostra un alert che avvisa della vittoria e chiede se si vuole rigiocare
             if (confirm("Hai vinto! Vuoi rigiocare?")) {
+                resetGame();
                 createGrid();
             };
         };
     };
+};
+// Funzione di reset game se l'utente perde o vince
+function resetGame() {
+    gameEnd = false;
+    score = 0;
+    grid.innerHTML = "";
+    scoreDisplay.innerText = `Score: ${score}`;
 };
