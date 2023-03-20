@@ -13,6 +13,7 @@ createGridButton.addEventListener('click', createGrid);
 let bombs = [];
 let score = 0;
 let maxScore = 0;
+
 function createGrid() {
     // Resetto il punteggio e la lista delle bombe
     score = 0;
@@ -73,22 +74,30 @@ function getRndInteger(min, max) {
 };
 
 // Funzione per gestire il click su una casella della griglia
+// imposto variabile per disabilitare il gioco nei casi di vittoria o sconfitta
+let gameEnd = false;
 function handleItemClick(event) {
+    if (gameEnd) {
+        return;
+    }
     const clickedItem = event.currentTarget;
     const clickedItemNumber = parseInt(clickedItem.innerText);
   
     // Controllo se la casella cliccata è una bomba
     if (bombs.includes(clickedItemNumber)) {
         clickedItem.classList.add("bomb");
+        gameEnd = true;
         // Mostra tutte le bombe presenti nella griglia
         grid.querySelectorAll(".grid-item").forEach(item => {
             if (bombs.includes(parseInt(item.innerText))) {
                 item.classList.add("bomb");
+
             };
         });
         // Mostra un alert che avvisa della sconfitta e chiede se si vuole rigiocare
         if (confirm("Hai perso! Vuoi rigiocare?")) {
             createGrid();
+            gameEnd = true;
         };
     } else {
         if (!clickedItem.classList.contains("clicked")) {
@@ -99,6 +108,7 @@ function handleItemClick(event) {
         };
         // Controlla se il gioco è stato vinto
         if (score === maxScore) {
+            gameEnd = true;
             // Mostra un alert che avvisa della vittoria e chiede se si vuole rigiocare
             if (confirm("Hai vinto! Vuoi rigiocare?")) {
                 createGrid();
