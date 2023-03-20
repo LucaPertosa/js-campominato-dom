@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campo minato</title>
+    <!-- CSS LINK -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="main-container">
+        <!-- HEADER -->
+        <header> 
+            <nav class="container flex align-i-c jc-sb">
+                <!-- Logo -->
+                <div class="right-nav flex align-i-c">
+                    <div class="logo">
+                        <img src="img/logo.png" alt="">
+                    </div>  
+                    <h1>Campo Minato</h1>
+                </div>
+                <!-- /Logo -->
+                <!-- Buttons -->
+                <div class="left-nav">
+                    <label for="difficulty-level" class="fs-2">Difficoltà:</label>
+                    <select name="difficulty" id="difficulty-level">
+                        <option selected></option>
+                        <option value="100">Facile</option>
+                        <option value="81">Medio</option>
+                        <option value="49">Difficile</option>
+                    </select>
+                    <button id="create-grid">
+                        Play
+                    </button>
+                </div>
+                <!-- /Buttons -->
+            </nav>
+        </header>
+        <!-- /HEADER -->
+        
+        <!-- MAIN -->
+        <main>
+            <div class="container">
+                <div class="grid">
+
+                </div>
+            </div>
+        </main>
+        <!-- /MAIN -->
+        
+        <!-- FOOTER -->
+        <footer class="container">
+            <div class="rdm">
+                Made with &hearts; by <a href="https://boolean.careers">Boolean</a>
+            </div>
+        </footer>
+        <!-- /FOOTER -->
+    </div>
+
+    <!-- SCRIPT -->
+    <script src="js/script.js"></script>
+</body>
+</html>
